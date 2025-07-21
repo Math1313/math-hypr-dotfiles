@@ -1,0 +1,126 @@
+---
+- name: Config Arch PC
+  hosts: localhost
+  become: true
+  
+  vars_files:
+    - vars/packages.yml
+    - vars/aur_packages.yml
+  vars:
+    yay_repo: "/home/math/yay"
+    dotfiles_repo: "/home/math/dotfiles"
+  tasks:
+    - name: Install config packages
+      ansible.builtin.pacman:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ packages_for_config }}"
+
+    - name: Clone Neovim config from Github
+      ansible.builtin.git:
+        repo: https://github.com/Math1313/math.nvim.git
+        dest: "~/.config/nvim"
+
+    - name: Clone dotfiles
+      ansible.builtin.git:
+        repo: https://github.com/Math1313/math-hypr-dotfiles
+        dest: "{{ dotfiles_repo }}"
+      become: false
+
+    - name: Check if YAY is already install
+      ansible.builtin.stat:
+        path: /usr/bin/yay
+      register: yay_stat
+
+    - name: Configure AUR
+      block:
+        - name: Configure AUR | Get YAY repo
+          ansible.builtin.git:
+            repo: https://aur.archlinux.org/yay.git
+            dest: "{{ yay_repo }}"
+          become: false
+
+        - name: Configure AUR | Enable 'math' to use pacman without password
+          ansible.builtin.copy:
+            dest: /etc/sudoers.d/pacman_nopasswd_math
+            content: "math ALL=(ALL) NOPASSWD: /usr/bin/pacman\n"
+            owner: root
+            group: root
+            mode: '0440'
+
+        - name: Configure AUR | Build package
+          ansible.builtin.command:
+            cmd: "makepkg -si --noconfirm"
+            chdir: "{{ yay_repo }}"
+          become: false
+
+        - name: Configure AUR | Remove YAY repo
+          ansible.builtin.file:
+            path: "{{ yay_repo }}"
+            state: absent
+
+        - name: Configure AUR | Disable 'math' to use pacman without password
+          ansible.builtin.file:
+            path: /etc/sudoers.d/pacman_nopasswd_mathis
+            state: absent
+      when: not yay_stat.stat.exists
+
+    - name: Configure Hyprland
+      block:
+        - name: Configure Hyprland | Install Hyprland
+          ansible.builtin.pacman:
+            name: hyprland
+            state: present
+
+        - name: Configure Hyprland | Install desktop packages
+          ansible.builtin.pacman:
+            name: "{{ item }}"
+            state: present
+          loop: "{{ packages_for_desktop_env }}"
+
+        - name: Configure Hyprland | Copy Hyprland dotfiles to .config
+          ansible.builtin.copy:
+            src: "{{ dotfiles_repo }}/.config/hypr/"
+            dest: "~/.config/hypr/"
+            force: true
+          become: false
+
+        - name: Configure Hyprland | Copy final hyprland.conf file
+          ansible.builtin.copy:
+            src: "{{ dotfiles_repo }}/.config/hypr/hyprland.conf"
+            dest: "~/.config/hypr/hyprland.conf"
+            force: true
+          become: false
+
+    - name: Install AUR packages
+      ansible.builtin.command:
+        cmd: "yay -S --noconfirm {{ item }}"
+      loop: "{{ aur_packages }}"
+      become: false
+
+    - name: Condfigure ReGreet
+      block:
+        - name: Configure ReGreet | Create Hyprland configuration file
+          ansible.builtin.copy:
+            dest: /etc/greetd/hyprland.conf
+            src: "{{ dotfiles_repo }}/greetd-hyprland.conf"
+
+        - name: Configure ReGreet | Update greetd configuration file
+          ansible.builtin.lineinfile:
+            path: /etc/greetd/config.toml
+            regexp: '^command\s*='
+            line: 'command = "Hyprland --config /etc/greetd/hyprland.conf"'
+
+        - name: Configure ReGreet | Enable greetd at startup
+          ansible.builtin.systemd_service:
+            name: greetd.service
+            enabled: true
+
+        - name: Configure ReGreet | Make sur greeter user have access to configuration
+          ansible.builtin.file:
+            path: /etc/greetd
+            owner: greeter
+            group: greeter
+            recurse: yes
+...
+
