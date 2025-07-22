@@ -82,7 +82,7 @@
             "default": [" ", " ", " "]
         },
         "on-click": "pwvucontrol",
-        "min-length": 13,
+        "min-length": 9,
     },
 
     "battery": {
