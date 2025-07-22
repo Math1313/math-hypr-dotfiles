@@ -17,3 +17,6 @@ pywalfox update
 
 # Mettre à jour le thème de Fuzzel
 ~/.config/scripts/update-fuzzel-theme.sh
+
+# Remettre le focus sur les fenêtres
+hyprctl dispatch focuscurrentorlast
