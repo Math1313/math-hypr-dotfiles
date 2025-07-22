@@ -31,7 +31,7 @@
         "min-length": 13,
     },
     "custom/pacman": {
-        "format": "{} ",
+        "format": "{}  ",
         "interval": 3600,                     			// every hour
         "exec": "(checkupdates;pacman -Qm | yay vercmp) | wc -l",	// # of updates
         "exec-if": "exit 0",                  			// always run; consider advanced run conditions
@@ -41,7 +41,7 @@
     },
 
     //"custom/mail": {
-    //    "format": "{} ",
+    //    "format": "{}  ",
     //    "exec": "$HOME/.config/waybar/scripts/checkgmail.py",
     //    "interval": 120,
     //    "on-click": "google-chrome-stable https://mail.google.com/mail/u/0/#inbox ; pkill -SIGRTMIN+9 waybar",
@@ -70,7 +70,7 @@
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
+        "format-source": "",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
