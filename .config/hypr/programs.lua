@@ -4,5 +4,5 @@
 
 -- Set programs that you use
 terminal = "kitty"
-fileManager = "dolphin"
+fileManager = "spf"
 menu = "hyprlauncher"
