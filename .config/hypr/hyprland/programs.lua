@@ -6,3 +6,4 @@
 terminal = "kitty"
 fileManager = "spf"
 menu = "hyprlauncher"
+browser = "firefox"
