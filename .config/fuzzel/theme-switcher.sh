@@ -10,13 +10,13 @@ CHOICE=$(ls "$WALLPAPER_DIR" | fuzzel --dmenu --prompt "Theme Switcher  ")
 [ -z "$CHOICE" ] && exit 0
 
 # Appliquer le nouveau fond d'écran et le thème de couleur
-swww img "$WALLPAPER_DIR/$CHOICE" && wal --cols16 darken -i "$WALLPAPER_DIR/$CHOICE"
+awww img "$WALLPAPER_DIR/$CHOICE" && wallust run "$WALLPAPER_DIR/$CHOICE"
 
 # Mettre à jour le thème de Pywalfox
-pywalfox update
+#pywalfox update
 
 # Mettre à jour le thème de Fuzzel
-~/.config/scripts/update-fuzzel-theme.sh
+./update-fuzzel-theme.sh
 
 # Remettre le focus sur les fenêtres
 hyprctl dispatch focuscurrentorlast
