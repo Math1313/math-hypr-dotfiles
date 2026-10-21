@@ -1,0 +1,12 @@
+
+{
+  "pinned_profile": {
+    "name": "laptop",
+    "fingerprint": [
+      "BOE 0x08DD"
+    ]
+  },
+  "active_profile": "laptop",
+  "hypr_config_format": "lua",
+  "config_dir": "~/.config/hypr/hyprland/"
+}
