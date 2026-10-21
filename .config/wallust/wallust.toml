@@ -77,6 +77,7 @@ palette = "salience"
 #   dunst    = { template = 'dunst',    target = '~/.config/dunst/dunstrc' }
 kitty    = { template = 'kitty.conf',    target = '~/.config/kitty/colors.conf' }
 fuzzel	 = { template = "fuzzel.ini", target = "~/.config/fuzzel/colors.ini" }
+hypr = { src = "customColorBorders.lua", dst = "~/.config/hypr/hyprland/customColorBorders.lua" }
 #   # directory: template every file inside src/ into dst/
 #   glava    = { template = 'glava/',   target = '~/.config/glava/', max_depth = 1 }
 #   # pywal compatibility
