@@ -76,6 +76,7 @@ palette = "salience"
 #   zathura  = { template = 'zathura',  target = '~/.config/zathura/zathurarc' }
 #   dunst    = { template = 'dunst',    target = '~/.config/dunst/dunstrc' }
 kitty    = { template = 'kitty.conf',    target = '~/.config/kitty/colors.conf' }
+fuzzel	 = { template = "fuzzel.ini", target = "~/.config/fuzzel/colors.ini" }
 #   # directory: template every file inside src/ into dst/
 #   glava    = { template = 'glava/',   target = '~/.config/glava/', max_depth = 1 }
 #   # pywal compatibility
