@@ -22,7 +22,7 @@ backend = "fastresize"
 #   salience  perceptually prominent colors (default)
 #   ansi      classic TTY layout: color1=red, color2=green, and so on
 #   kmeans    k-means clustering in Lab color space
-palette = "salience"
+palette = "salience-dark16"
 
 # ~ Style ~
 # dark (default) - dark background, light foreground
