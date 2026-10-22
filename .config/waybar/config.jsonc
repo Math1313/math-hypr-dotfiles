@@ -6,6 +6,7 @@
     "hyprland/submap",
     "group/volume",
     "battery",
+    "power-profiles-daemon",
     "bluetooth",
     "network",
     "cpu",
@@ -44,6 +45,17 @@
         "󰂋",
         "󰂅"
       ]
+    }
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nCPU driver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
     }
   },
   "bluetooth": {
