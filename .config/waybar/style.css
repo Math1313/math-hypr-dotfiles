@@ -1,3 +1,4 @@
+@import url("colors.css");
 @define-color highlight rgba(117, 241, 250, 1);
 @define-color dark-9 rgba(24, 24, 27, 1);
 @define-color dark-8 rgba(39, 39, 42, 1);
@@ -12,7 +13,7 @@
 }
 
 window#waybar {
-  background-color: @dark-9;
+  background-color: @color0;
   color: white;
 }
 
@@ -25,8 +26,8 @@ window#waybar {
 }
 
 #workspaces button.active {
-  background: @highlight;
-  color: black;
+  background: @color5;
+  color: @color0;
   font-weight: 700;
 }
 
@@ -39,14 +40,14 @@ window#waybar {
 #volume {
   border-radius: 8px;
   padding: 5px 8px;
-  background: @dark-8;
+  background: @color1;
   margin: 5px 10px 5px 0px;
 }
 
 #submap,
 #workspaces button.urgent {
   background: rgba(227, 81, 73, 1);
-  color: black;
+  color: @color0;
 }
 
 #pulseaudio-slider {
@@ -75,11 +76,11 @@ window#waybar {
 #pulseaudio-slider highlight {
   min-width: 10px;
   border-radius: 5px;
-  background: @highlight;
+  background: @color5;
 }
 
 tooltip {
-  background: @dark-9;
+  background: @color0;
   border-radius: 5px;
 }
 
@@ -87,7 +88,7 @@ tooltip label {
   color: white;
 }
 #media {
-  color: #42ff9f;
+  color: @color12;
   margin: 7px 0px 7px 80px;
 }
 
@@ -101,6 +102,6 @@ tooltip label {
 }
 
 #custom-media-time {
-  color: @dark-5;
+  color: @color6;
   font-size: 14px;
 }
