@@ -13,4 +13,5 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("waybar & ~/.config/waybar/watch-colors.sh")
 	hl.exec_cmd("awww-daemon")
 	--  hl.exec_cmd("waybar & hyprpaper & firefox")
+	--
 end)

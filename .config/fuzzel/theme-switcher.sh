@@ -15,8 +15,8 @@ awww img "$WALLPAPER_DIR/$CHOICE" && wallust run "$WALLPAPER_DIR/$CHOICE"
 # Mettre à jour le thème de Pywalfox
 #pywalfox update
 
-# Mettre à jour le thème de Fuzzel
-./update-fuzzel-theme.sh
+# Mettre à jour btop
+pkill -USR2 btop
 
 # Remettre le focus sur les fenêtres
 hyprctl dispatch focuscurrentorlast
