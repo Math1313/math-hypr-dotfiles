@@ -1,5 +1,5 @@
 local GAP = 10 -- espacement uniforme en pixels
-local BAR_TOP = 10 -- hauteur de waybar si elle est en haut (px)
+local BAR_TOP = 46 -- hauteur de waybar si elle est en haut (px)
 local BAR_BOTTOM = 0 -- hauteur de waybar si elle est en bas (px)
 
 -- Largeur d'une colonne : (écran - 3 espaces) / 2
@@ -20,6 +20,7 @@ local function dash_column(col, top_class, bottom_class, ratio)
 			match = { class = "^dash-" .. class .. "$" },
 			workspace = "special:dashboard",
 			float = true,
+			opaque = true,
 			move = { x, y },
 			size = { COL_W, h },
 		})
@@ -38,7 +39,7 @@ hl.bind("SUPER + D", hl.dsp.workspace.toggle_special("dashboard"))
 hl.on("hyprland.start", function()
 	hl.exec_cmd("kitty --class dash-btop -o font_size=10 -e btop")
 	hl.exec_cmd(
-		[[kitty --class dash-fastfetch -o font_size=10 sh -c 'stty -echo; fastfetch; printf "\033[?25l"; exec sleep infinity']]
+		[[kitty --class dash-fastfetch -o font_size=10 bash -c 'export PATH="$HOME/.cargo/bin:$PATH"; stty -echo; ~/.config/hypr/scripts/pokemon.sh; printf "\033[?25l"; exec sleep infinity']]
 	)
 	hl.exec_cmd(
 		[[kitty --class dash-arttime -o font_size=10 arttime --theme light --nolearn -a worldmap -t "Welcome, Mathis"]]
